@@ -1,14 +1,14 @@
 version: '3.3'
 services:
   app:
-    image: sedesbarrionorte_1.0
+    image: sedesbarrionorte_1.1
     restart: always
     environment:
-      ASPNETCORE_URLS: "http://0.0.0.0:5005"
+      ASPNETCORE_URLS: "http://0.0.0.0:5002"
       ASPNETCORE_ENVIRONMENT: "Development"
       ASPNETCORE_FORWARDEDHEADERS_ENABLED: "true"
     ports:
-      - 5000:5000
+      - 5002:5002
     build:
       context: .
       dockerfile: ./Dockerfile
