@@ -1,0 +1,280 @@
+﻿@page "/"
+@rendermode InteractiveServer
+@using SedesBarrioNorte.Models
+@using SedesBarrioNorte.Services
+@inject ConsultaComisionesService ConsultaService
+@inject ExcelExportService ExcelService
+@inject IJSRuntime JsRuntime
+
+<PageTitle>Home</PageTitle>
+
+<h1>Comisiones por Sede</h1>
+
+<div class="card shadow-sm mb-3">
+	<div class="card-body">
+		<div class="row g-3 align-items-end">
+			<div class="col-12 col-lg-4">
+				<label class="form-label">sede</label>
+				<select class="form-select" multiple size="8" @onchange="OnSedesChange">
+					@foreach (var sede in _sedesDisponibles)
+					{
+						<option value="@sede.fil_codigo" selected="@_sedesSeleccionadas.Contains(sede.fil_codigo)">@sede.fil_denion (@sede.fil_codigo)</option>
+					}
+				</select>
+			</div>
+
+			<div class="col-12 col-md-4 col-lg-2">
+				<label class="form-label">inicio</label>
+				<input class="form-control" type="date" @bind="_inicio" />
+			</div>
+
+			<div class="col-12 col-md-4 col-lg-2">
+				<label class="form-label">desde</label>
+				<input class="form-control" type="date" @bind="_desde" />
+			</div>
+
+			<div class="col-12 col-md-4 col-lg-2">
+				<label class="form-label">hasta</label>
+				<input class="form-control" type="date" @bind="_hasta" />
+			</div>
+
+			<div class="col-12 col-lg-2 d-grid">
+				<button class="btn btn-primary" @onclick="ConsultarAsync" disabled="@_cargando">Aceptar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+@if (!string.IsNullOrWhiteSpace(_error))
+{
+	<div class="alert alert-danger" role="alert">@_error</div>
+}
+
+@if (_cargando)
+{
+	<div class="alert alert-info" role="status">Ejecutando queries, por favor espere...</div>
+}
+
+<ul class="nav nav-tabs mb-3" role="tablist">
+	<li class="nav-item" role="presentation">
+		<button type="button" class="nav-link @TabClass("alumnos")" @onclick='() => _solapaActiva = "alumnos"'>Query Alumnos</button>
+	</li>
+	<li class="nav-item" role="presentation">
+		<button type="button" class="nav-link @TabClass("sedes")" @onclick='() => _solapaActiva = "sedes"'>Query Sedes</button>
+	</li>
+</ul>
+
+@if (_solapaActiva == "alumnos")
+{
+	<div class="d-flex justify-content-between align-items-center mb-2">
+		<strong>Resultado Query Alumnos: @_alumnos.Count registros</strong>
+		<button class="btn btn-outline-success" @onclick="ExportarAlumnosAsync" disabled="@(_alumnos.Count == 0)">Exportar Excel Alumnos</button>
+	</div>
+
+	<div class="table-responsive tabla-wrap">
+		<table class="table table-sm table-striped table-bordered align-middle">
+			<thead>
+				<tr>
+					<th class="text-end">Codigo Alumno</th>
+					<th>Sede</th>
+					<th>Alumno</th>
+					<th>Mail</th>
+					<th>Estado</th>
+					<th>Carrera</th>
+					<th class="text-end">Importe Pagado</th>
+					<th class="text-end">Cantidad Cuotas</th>
+					<th class="text-end">Porcentaje</th>
+					<th class="text-end">Comision</th>
+				</tr>
+			</thead>
+			<tbody>
+				@if (_alumnos.Count == 0)
+				{
+					<tr>
+						<td colspan="10" class="text-center">Sin datos para mostrar.</td>
+					</tr>
+				}
+				else
+				{
+					@foreach (var fila in _alumnos)
+					{
+						<tr>
+							<td class="text-end">@fila.codigo_alumno</td>
+							<td>@fila.filial</td>
+							<td>@fila.alumno</td>
+							<td>@fila.mail</td>
+							<td>@fila.estado</td>
+							<td>@fila.carrera</td>
+							<td class="text-end">@FormatoDecimal(fila.importe_pagado)</td>
+							<td class="text-end">@(fila.cantidad_total_cuotas?.ToString() ?? string.Empty)</td>
+							<td class="text-end">@FormatoDecimal(fila.PORCENTAJE)</td>
+							<td class="text-end">@FormatoDecimal(fila.COMISION)</td>
+						</tr>
+					}
+				}
+			</tbody>
+		</table>
+	</div>
+}
+else
+{
+	<div class="d-flex justify-content-between align-items-center mb-2">
+		<strong>Resultado Query Sedes: @_sedesResumen.Count registros</strong>
+		<button class="btn btn-outline-success" @onclick="ExportarSedesAsync" disabled="@(_sedesResumen.Count == 0)">Exportar Excel Sedes</button>
+	</div>
+
+	<div class="table-responsive tabla-wrap">
+		<table class="table table-sm table-striped table-bordered align-middle">
+			<thead>
+				<tr>
+					<th>Sede</th>
+					<th class="text-end">Importe Pagado</th>
+					<th class="text-end">Comision</th>
+				</tr>
+			</thead>
+			<tbody>
+				@if (_sedesResumen.Count == 0)
+				{
+					<tr>
+						<td colspan="3" class="text-center">Sin datos para mostrar.</td>
+					</tr>
+				}
+				else
+				{
+					@foreach (var fila in _sedesResumen)
+					{
+						<tr>
+							<td>@fila.filial</td>
+							<td class="text-end">@FormatoDecimal(fila.importe_pagado)</td>
+							<td class="text-end">@FormatoDecimal(fila.COMISION)</td>
+						</tr>
+					}
+				}
+			</tbody>
+		</table>
+	</div>
+}
+
+@code {
+	private readonly List<SedeOpcion> _sedesDisponibles = [];
+	private readonly HashSet<string> _sedesSeleccionadas = [];
+	private readonly List<AlumnoResultado> _alumnos = [];
+	private readonly List<SedeResultado> _sedesResumen = [];
+
+	private string _solapaActiva = "alumnos";
+	private string _error = string.Empty;
+	private bool _cargando;
+
+	private DateTime _inicio;
+	private DateTime _desde;
+	private DateTime _hasta;
+
+	protected override async Task OnInitializedAsync()
+	{
+		var hoy = DateTime.Today;
+		_inicio = new DateTime(hoy.Year, 1, 1);
+		_desde = new DateTime(hoy.Year, hoy.Month, 16);
+		_hasta = new DateTime(hoy.Year, hoy.Month, 15);
+
+		try
+		{
+			var sedes = await ConsultaService.ObtenerSedesAsync();
+			_sedesDisponibles.AddRange(sedes);
+
+			foreach (var sede in sedes)
+			{
+				_sedesSeleccionadas.Add(sede.fil_codigo);
+			}
+		}
+		catch (Exception ex)
+		{
+			_error = $"Error al cargar sedes: {ex.Message}";
+		}
+	}
+
+	private async Task ConsultarAsync()
+	{
+		_error = string.Empty;
+		_cargando = true;
+
+		try
+		{
+			if (_sedesSeleccionadas.Count == 0)
+			{
+				throw new InvalidOperationException("Debe seleccionar al menos una sede.");
+			}
+
+			var inicio = _inicio;
+			var desde = _desde;
+			var hasta = _hasta;
+
+			var sedes = _sedesSeleccionadas.ToList();
+
+			var taskAlumnos = ConsultaService.ObtenerAlumnosAsync(sedes, inicio, desde, hasta);
+			var taskSedes = ConsultaService.ObtenerSedesResumenAsync(sedes, inicio, desde, hasta);
+
+			await Task.WhenAll(taskAlumnos, taskSedes);
+
+			_alumnos.Clear();
+			_alumnos.AddRange(taskAlumnos.Result);
+
+			_sedesResumen.Clear();
+			_sedesResumen.AddRange(taskSedes.Result);
+		}
+		catch (Exception ex)
+		{
+			_error = $"Error al ejecutar consultas: {ex.Message}";
+		}
+		finally
+		{
+			_cargando = false;
+		}
+	}
+
+	private async Task ExportarAlumnosAsync()
+	{
+		var bytes = ExcelService.ExportarAlumnos(_alumnos);
+		var base64 = Convert.ToBase64String(bytes);
+		await JsRuntime.InvokeVoidAsync(
+			"downloadFileFromBytes",
+			$"query_alumnos_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx",
+			"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+			base64);
+	}
+
+	private async Task ExportarSedesAsync()
+	{
+		var bytes = ExcelService.ExportarSedes(_sedesResumen);
+		var base64 = Convert.ToBase64String(bytes);
+		await JsRuntime.InvokeVoidAsync(
+			"downloadFileFromBytes",
+			$"query_sedes_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx",
+			"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+			base64);
+	}
+
+	private void OnSedesChange(ChangeEventArgs e)
+	{
+		_sedesSeleccionadas.Clear();
+
+		if (e.Value is not IEnumerable<string> seleccionadas)
+		{
+			return;
+		}
+
+		foreach (var sede in seleccionadas)
+		{
+			_sedesSeleccionadas.Add(sede);
+		}
+	}
+
+	private static string FormatoDecimal(decimal? valor)
+	{
+		return valor.HasValue ? valor.Value.ToString("0.00") : string.Empty;
+	}
+
+	private string TabClass(string nombreTab)
+	{
+		return _solapaActiva == nombreTab ? "active" : string.Empty;
+	}
+}

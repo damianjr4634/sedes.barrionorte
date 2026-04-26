@@ -1,0 +1,15 @@
+h1 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+}
+
+.tabla-wrap {
+    max-height: 60vh;
+}
+
+.tabla-wrap table thead th {
+    position: sticky;
+    top: 0;
+    background-color: #f8f9fa;
+    z-index: 1;
+}
