@@ -4,7 +4,7 @@ services:
     image: sedesbarrionorte_1.0
     restart: always
     environment:
-      ASPNETCORE_URLS: "http://0.0.0.0:5000"
+      ASPNETCORE_URLS: "http://0.0.0.0:5005"
       ASPNETCORE_ENVIRONMENT: "Development"
       ASPNETCORE_FORWARDEDHEADERS_ENABLED: "true"
     ports:
