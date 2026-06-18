@@ -318,7 +318,7 @@ public sealed class ConsultaComisionesService
               and (tbl_cte.cte_xadel = '0' or tbl_cte.cte_xadel is NULL)
               and tbl_cte.cte_fecfac >= {$$ desde}
               and tbl_cte.cte_fecfac <= {$$ hasta}
-              AND tbl_als.als_aest in ('4','126')
+              AND tbl_als.als_aest in ('4','153')
         group by tbl_cte.cte_pers,tbl_fil.fil_denion, tbl_cte.cte_pers,tbl_cte.cte_leg,tbl_cte.cte_cuenta,tbl_cte.cte_aniocuota,tbl_cte.cte_ncuota,tbl_cte.cte_sucfac,tbl_cte.cte_recibo,tbl_cte.cte_cajero,tbl_cte.cte_lote
         UNION ALL
         SELECT
@@ -337,7 +337,7 @@ public sealed class ConsultaComisionesService
         LEFT OUTER JOIN tbl_fil  ON tbl_fil.fil_codigo = ta.als_afil
         LEFT OUTER JOIN tbl_eso ON tbl_eso.eso_codigo=ta.als_aest
         WHERE ta.als_afil IN ({$$ sede})
-              AND ta.als_aest in ('4','126')
+              AND ta.als_aest in ('4','153')
               AND NOT EXISTS(
                             SELECT 1
                             from tbl_cte tc
@@ -454,7 +454,7 @@ public sealed class ConsultaComisionesService
                   and (tbl_cte.cte_xadel = '0' or tbl_cte.cte_xadel is NULL)
                   and tbl_cte.cte_fecfac >= {$$ desde}
             and tbl_cte.cte_fecfac <= {$$ hasta}
-            AND tbl_als.als_aest in ('4','126')
+            AND tbl_als.als_aest in ('4','153')
             group BY 1
         """;
 }
