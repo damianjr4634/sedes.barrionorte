@@ -193,7 +193,7 @@ public sealed class ConsultaComisionesService
                when '39'  then 20 when '27'  then 20  when '6'  then 25
                when '17'  then 25 when '1' then 30 when '38' then 20
                when '36' then 35  when '26'  then 25
-               when '22' then 20  when '23' then 20 when '46' the 20
+               when '22' then 20  when '23' then 20 when '46' then 20
             end
             when 2 then
             case tbl_als.als_afil
@@ -202,7 +202,7 @@ public sealed class ConsultaComisionesService
                when '39'  then 20 when '27'  then 20  when '6'  then 25
                when '17'  then 25 when '1' then 30 when '38' then 20
                when '36'  then 35 when '26'  then 25
-               when '22' then 20  when '23' then 20 when '46' the 20
+               when '22' then 20  when '23' then 20 when '46' then 20
             end
             when 3 then
             case tbl_als.als_afil
@@ -211,7 +211,7 @@ public sealed class ConsultaComisionesService
                when '39'  then 20 when '27'  then 20 when '6'  then 25
                when '17'  then 25 when '1' then 30 when '38' then 20
                when '36'  then 25 when '26'  then 25
-               when '22' then 20  when '23' then 20 when '46' the 20
+               when '22' then 20  when '23' then 20 when '46' then 20
             end
             when 4 then
             case tbl_als.als_afil
@@ -220,7 +220,7 @@ public sealed class ConsultaComisionesService
                when '39'  then 20 when '27'  then 20 when '6'  then 25
                when '17'  then 25 when '1' then 30 when '38' then 20
                when '36'  then 25 when '26'  then 25
-               when '22' then 20  when '23' then 20 when '46' the 20
+               when '22' then 20  when '23' then 20 when '46' then 20
             end
             when 5 then
             case tbl_als.als_afil
@@ -229,7 +229,7 @@ public sealed class ConsultaComisionesService
                when '39'  then 20 when '27'  then 20 when '6'  then 25
                when '17'  then 25 when '1' then 30 when '38' then 20
                when '36'  then 25 when '26'  then 25
-               when '22' then 20  when '23' then 20 when '46' the 20
+               when '22' then 20  when '23' then 20 when '46' then 20
             end
             when 6 then
             case tbl_als.als_afil
@@ -238,7 +238,7 @@ public sealed class ConsultaComisionesService
                when '39'  then 20 when '27'  then 20  when '6'  then 25
                when '17'  then 25 when '1' then 30 when '38' then 20
                when '36'  then 25 when '26'  then 25
-               when '22' then 20  when '23' then 20 when '46' the 20
+               when '22' then 20  when '23' then 20 when '46' then 20
             end
             else
             case tbl_als.als_afil
@@ -247,7 +247,7 @@ public sealed class ConsultaComisionesService
                when '40'  then 20 when '39'  then 20 when '27'  then 20
                when '6'  then 30  when '17'  then 30 when '1' then 30
                when '38' then 20  when '36'  then 30 when '26'  then 30
-               when '22' then 20  when '23' then 20 when '46' the 20
+               when '22' then 20  when '23' then 20 when '46' then 20
             end
             END AS PORCENTAJE,
 
@@ -264,7 +264,7 @@ public sealed class ConsultaComisionesService
                    when '39'  then 20 when '27'  then 20  when '6'  then 25
                    when '17'  then 25 when '1' then 30 when '38' then 20
                    when '36' then 35  when '26'  then 25
-                   when '22' then 20  when '23' then 20 when '46' the 20
+                   when '22' then 20  when '23' then 20 when '46' then 20
                 end
                 when 2 then
                 case tbl_als.als_afil
@@ -273,7 +273,7 @@ public sealed class ConsultaComisionesService
                    when '39'  then 20 when '27'  then 20  when '6'  then 25
                    when '17'  then 25 when '1' then 30 when '38' then 20
                    when '36'  then 35 when '26'  then 25
-                   when '22' then 20  when '23' then 20 when '46' the 20
+                   when '22' then 20  when '23' then 20 when '46' then 20
                 end
                 when 3 then
                 case tbl_als.als_afil
@@ -282,7 +282,7 @@ public sealed class ConsultaComisionesService
                    when '39'  then 20 when '27'  then 20 when '6'  then 25
                    when '17'  then 25 when '1' then 30 when '38' then 20
                    when '36'  then 25 when '26'  then 25
-                   when '22' then 20  when '23' then 20 when '46' the 20
+                   when '22' then 20  when '23' then 20 when '46' then 20
                 end
                 when 4 then
                 case tbl_als.als_afil
@@ -291,7 +291,7 @@ public sealed class ConsultaComisionesService
                    when '39'  then 20 when '27'  then 20 when '6'  then 25
                    when '17'  then 25 when '1' then 30 when '38' then 20
                    when '36'  then 25 when '26'  then 25
-                   when '22' then 20  when '23' then 20 when '46' the 20
+                   when '22' then 20  when '23' then 20 when '46' then 20
                 end
                 when 5 then
                 case tbl_als.als_afil
@@ -300,7 +300,7 @@ public sealed class ConsultaComisionesService
                    when '39'  then 20 when '27'  then 20 when '6'  then 25
                    when '17'  then 25 when '1' then 30 when '38' then 20
                    when '36'  then 25 when '26'  then 25
-                   when '22' then 20  when '23' then 20 when '46' the 20
+                   when '22' then 20  when '23' then 20 when '46' then 20
                 end
                 when 6 then
                 case tbl_als.als_afil
@@ -309,7 +309,7 @@ public sealed class ConsultaComisionesService
                    when '39'  then 20 when '27'  then 20  when '6'  then 25
                    when '17'  then 25 when '1' then 30 when '38' then 20
                    when '36'  then 25 when '26'  then 25
-                   when '22' then 20  when '23' then 20 when '46' the 20
+                   when '22' then 20  when '23' then 20 when '46' then 20
                 end
                 else
                 case tbl_als.als_afil
@@ -318,7 +318,7 @@ public sealed class ConsultaComisionesService
                    when '40'  then 20 when '39'  then 20 when '27'  then 20
                    when '6'  then 30  when '17'  then 30 when '1' then 30
                    when '38' then 20  when '36'  then 30 when '26'  then 30
-                   when '22' then 20  when '23' then 20 when '46' the 20
+                   when '22' then 20  when '23' then 20 when '46' then 20
                 end
                 END)/100.00,2) AS COMISION
         from tbl_cte
@@ -407,7 +407,7 @@ public sealed class ConsultaComisionesService
                    when '39'  then 20 when '27'  then 20  when '6'  then 25
                    when '17'  then 25 when '1' then 30 when '38' then 20
                    when '36' then 35  when '26'  then 25
-                   when '22' then 20  when '23' then 20 when '46' the 20
+                   when '22' then 20  when '23' then 20 when '46' then 20
                 end
                 when 2 then
                 case tbl_als.als_afil
@@ -416,7 +416,7 @@ public sealed class ConsultaComisionesService
                    when '39'  then 20 when '27'  then 20  when '6'  then 25
                    when '17'  then 25 when '1' then 30 when '38' then 20
                    when '36'  then 35 when '26'  then 25
-                   when '22' then 20  when '23' then 20 when '46' the 20
+                   when '22' then 20  when '23' then 20 when '46' then 20
                 end
                 when 3 then
                 case tbl_als.als_afil
@@ -425,7 +425,7 @@ public sealed class ConsultaComisionesService
                    when '39'  then 20 when '27'  then 20 when '6'  then 25
                    when '17'  then 25 when '1' then 30 when '38' then 20
                    when '36'  then 25 when '26'  then 25
-                   when '22' then 20  when '23' then 20 when '46' the 20
+                   when '22' then 20  when '23' then 20 when '46' then 20
                 end
                 when 4 then
                 case tbl_als.als_afil
@@ -434,7 +434,7 @@ public sealed class ConsultaComisionesService
                    when '39'  then 20 when '27'  then 20 when '6'  then 25
                    when '17'  then 25 when '1' then 30 when '38' then 20
                    when '36'  then 25 when '26'  then 25
-                   when '22' then 20  when '23' then 20 when '46' the 20
+                   when '22' then 20  when '23' then 20 when '46' then 20
                 end
                 when 5 then
                 case tbl_als.als_afil
@@ -443,7 +443,7 @@ public sealed class ConsultaComisionesService
                    when '39'  then 20 when '27'  then 20 when '6'  then 25
                    when '17'  then 25 when '1' then 30 when '38' then 20
                    when '36'  then 25 when '26'  then 25
-                   when '22' then 20  when '23' then 20 when '46' the 20
+                   when '22' then 20  when '23' then 20 when '46' then 20
                 end
                 when 6 then
                 case tbl_als.als_afil
@@ -452,7 +452,7 @@ public sealed class ConsultaComisionesService
                    when '39'  then 20 when '27'  then 20  when '6'  then 25
                    when '17'  then 25 when '1' then 30 when '38' then 20
                    when '36'  then 25 when '26'  then 25
-                   when '22' then 20  when '23' then 20 when '46' the 20
+                   when '22' then 20  when '23' then 20 when '46' then 20
                 end
                 else
                 case tbl_als.als_afil
@@ -461,7 +461,7 @@ public sealed class ConsultaComisionesService
                    when '40'  then 20 when '39'  then 20 when '27'  then 20
                    when '6'  then 30  when '17'  then 30 when '1' then 30
                    when '38' then 20  when '36'  then 30 when '26'  then 30
-                   when '22' then 20  when '23' then 20 when '46' the 20
+                   when '22' then 20  when '23' then 20 when '46' then 20
                 end
                 END)/100.00,2)) AS COMISION
             from tbl_cte
